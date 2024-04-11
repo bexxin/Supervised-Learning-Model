@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Demo</title>
+</head>
+<body>
+<h1>Machine Learning Model Deployment</h1>
+
+    <form action="/result" method="post">
+    
+    <Label for="date">Select Date:</Label>
+        <input type="date" id="date" name="dateInput">
+        </input>    
+
+    <Label for="time">Time</Label>
+        <input id="time" type="time" name="timeInput">
+        </input>
+        <br>
+    <Label for="roadClass">Road Class</Label>
+        <select id="roadClass" name="roadClass">
+            <option value="Collector">Collector</option>
+            <option value="Expressway">Expressway</option>
+            <option value="Express Ramp">Expressway Ramp</option>
+            <option valu="Laneway">Laneway</option>
+            <option value="Local">Local</option>
+            <option value="Major Arterial">Major Artery</option>
+            <option value="Major Arterial Ramp">Major Arterial Ramp</option>
+            <option value="Minor Arterial">Minor Artery</option>
+            <option value="Other">Other</option>
+            <option value="Pending">Pending</option>
+        </select>   
+        <br> 
+    
+    <Label for="latitude">Latitude</Label>
+        <input id="latitude" type="range" min="-90" max="90" step="0.1" name="latitudeInput" oninput="latitudeOutput.value=latitude.value">
+        <output id="latitudeOutput">0</output>
+        <br>
+        
+    
+        <Label for="longitude">Longitude</Label>
+            <input id="longitude" type="range" min="-180" max="180" step="0.1" name="longitudeInput" oninput="longitudeOutput.value=longitude.value">
+    <output id="longitudeOutput">0</output>
+    <br>
+
+        <input type="submit" value="Predict">
+        <input type="reset" value="Reset">
+            
+    </form>
+
+</body>
+</html>
+
