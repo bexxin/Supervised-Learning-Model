@@ -23,7 +23,7 @@
             <option value="Collector">Collector</option>
             <option value="Expressway">Expressway</option>
             <option value="Express Ramp">Expressway Ramp</option>
-            <option valu="Laneway">Laneway</option>
+            <option value="Laneway">Laneway</option>
             <option value="Local">Local</option>
             <option value="Major Arterial">Major Artery</option>
             <option value="Major Arterial Ramp">Major Arterial Ramp</option>
@@ -42,6 +42,15 @@
         <Label for="longitude">Longitude</Label>
             <input id="longitude" type="range" min="-180" max="180" step="0.1" name="longitudeInput" oninput="longitudeOutput.value=longitude.value">
     <output id="longitudeOutput">0</output>
+    <br>
+    <Label for="Model Selection">Classifier Type</Label>
+    <select id="classifier" name="classifier">
+        <option value="lr">Logistic Regression</option>
+        <option value="dt">Decision Tree Classifier</option>
+        <option value="svm">Support Vector Machine</option>
+        <option value="rf">Random Forest</option>
+        <option value="nn">Neural Network</option>
+    </select>
     <br>
 
         <input type="submit" value="Predict">

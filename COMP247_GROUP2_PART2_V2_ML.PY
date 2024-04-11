@@ -352,6 +352,8 @@ modelBuilder.fine_tune_models_grid_search(params)
 modelBuilder.fine_tune_models_randomized_search(params)
 
 modelBuilder.plot_models()
+
+#Deploy best model
 best_model=modelBuilder.models['Random Forest']
 final_pipeline=Pipeline(steps=[("preprocessor", preprocessor),("model",best_model)])
 final_pipeline.fit(X_train,y_train)
@@ -359,11 +361,10 @@ with open('final_pipeline.pkl','wb') as file:
     pickle.dump(final_pipeline, file)
 
 
-'''#Deploy best model
+#for loop to dump each model into its own pipeline
+for name, model in modelBuilder.models.items():
+    pipeline=Pipeline(steps=[("preprocessor", preprocessor),("model",model)])
+    pipeline.fit(X_train,y_train)
+    with open(f"{name}_pipeline.pkl",'wb') as file:
+        pickle.dump(pipeline,file)
 
-best_model.fit(X_train_preprocessed,y_train)
-print(best_model.get_params())
-
-with open('best_model.pkl','wb') as file:
-    pickle.dump(best_model, file)
-'''

@@ -14,7 +14,14 @@ from datetime import datetime
 
 app=Flask(__name__)
 
-model=joblib.load("./final_pipeline.pkl")
+#load pipelines
+#model=joblib.load("./final_pipeline.pkl")
+lr_pipeline=joblib.load("./Logistic Regression_pipeline.pkl")
+dt_pipeline=joblib.load("./Decision Tree_pipeline.pkl")
+svm_pipeline=joblib.load("./SVM_pipeline.pkl")
+rf_pipeline=joblib.load("./Random Forest_pipeline.pkl")
+nn_pipeline=joblib.load("./Neural Network_pipeline.pkl")
+
 
 #route the app
 @app.route("/")
@@ -31,6 +38,7 @@ def result():
     ROAD_CLASS=request.form.get("roadClass")
     LATITUDE=float(request.form.get("latitudeInput"))
     LONGITUDE=float(request.form.get("longitudeInput"))
+    classifier=request.form.get("classifier")
     
     #process date/time data
     date_data=date_input.split("-")
@@ -46,10 +54,26 @@ def result():
 
     columns=["TIME", "ROAD_CLASS", "LATITUDE", "LONGITUDE", "Weekday", "Day", "Month"]
     features=pd.DataFrame([[TIME,ROAD_CLASS,LATITUDE,LONGITUDE,Weekday,Day,Month]],columns=columns)
-
-    prediction=model.predict(features)
     
-    return render_template("result.html",prediction=prediction[0])
+
+    prediction=predict(classifier, features)
+    
+    return render_template("result.html",prediction=prediction)
+
+def predict(classifier,features):
+    if classifier == 'lr':
+        model=lr_pipeline
+    elif classifier =='dt':
+        model=dt_pipeline
+    elif classifier =='svm':
+        model=svm_pipeline
+    elif classifier == 'rf':
+        model=rf_pipeline
+    elif classifier == 'nn':
+        model=nn_pipeline
+        
+    prediction=model.predict(features)
+    return prediction[0]
 
 #run the app
 if __name__=="__main__":
